@@ -1,0 +1,77 @@
+.Setting{
+  display: flex;
+  font-family:" apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", Helvetica, Arial, sans-serif;
+  width: 100%;
+
+
+  .SettingContainer{
+    flex: 2;
+    border: 1px solid black;
+    width: 350px;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    
+  
+    .SettingHeader{
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin-left: 10%;
+      font-size: 25px;
+    }
+  
+    .Setting-Component{
+      display: flex;
+      margin-top: 50px;
+      flex-direction: column;
+      position: relative;
+      scroll-behavior: smooth;
+  
+  
+      .Setting-Category{
+      
+  
+        .Require{
+          margin-left: 8%;
+          font-size: 18px;
+          border-bottom: 1px solid rgb(70, 73, 73) ;
+          
+  
+          
+  
+        }
+        .Set-Icon{
+          display: flex;
+          align-items: center;
+          margin: 3%;
+          cursor: pointer;
+  
+         
+  
+    
+    
+           img{
+            /* filter: invert(50%) sepia(100%) hue-rotate(120deg) saturate(500%); */
+            padding: 3%;
+            height: 30px;
+           }
+        }
+        .Set-Icon:hover{
+          background-color: #dae2e7;
+          border-radius: 10px;
+        }
+  
+      }
+       
+     
+  
+      
+    }
+  }
+
+}
+
+
+

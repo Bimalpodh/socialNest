@@ -1,0 +1,199 @@
+.chat-box-container{
+  width: 100%;
+  display: flex;
+  border: 1px solid black;
+  background-color: rgb(203, 212, 209);
+  
+
+  .chat-box{
+    flex: 1;
+    width: 350px;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+
+    .Chat-Header{
+      border-bottom: 3px solid #3b5549;
+      background-color: #809189;
+      h3{
+        color: #0a1312;
+
+      }
+      .search-container{
+        display: flex;
+        border: 1px solid  #3b5549;
+        input{
+          height: 30px;
+          width:80%;
+          align-self: center;
+
+        }
+        img{
+          padding: 4px;
+          height: 40px;
+          align-items: center;
+        }
+      }
+    }
+
+    .friends-List{
+      display: flex;
+      margin-top: auto;
+      flex-direction: column;
+      
+      position: relative;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+
+
+      .friends{
+        margin: 10px;
+        display: flex;
+        align-items: center;
+  
+        img{
+          border: 1px solid #1fd882;
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+       
+        }
+        label{
+          padding-left: 4%;
+        }
+      }
+
+    }
+  
+
+  }
+  .message-container{
+    flex: 3;
+  }
+
+}
+
+/* Message Component css */
+
+.message-container{
+  display: flex;
+  flex-direction: column;
+  .messageHeader{
+    
+    border-bottom: 1px solid #918c8c;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    .profileContainer{
+      display: flex;
+      align-items: center;
+      margin: 20px;
+
+      img{
+        
+        height: 60px;
+        width: 60px;
+        background-image: cover;
+        border-radius: 50%;
+        margin-right: 10px;
+  
+      }
+      label{
+        font-size: 20px;
+
+
+      }
+    }
+    .contact{
+
+      .icon{
+
+        height: 40px;
+      }
+    }
+   
+
+  }
+
+  .message-box{
+    font-family: 'Gill Sans', 'Gill Sans MT', "Calibri", 'Trebuchet MS', sans-serif;
+    padding: 10px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column-reverse;
+
+    flex: 9;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+
+    .reciev-box{
+      display: flex;
+      flex-direction: column;
+        border: 1px solid #1fd882;
+        background-color: #91a0a7;
+        height: 40px;
+        width: fit-content;
+        align-items: center;
+        border-radius: 10px;
+        padding: 5px;
+
+
+      .reciever{
+        margin-top: 10px;
+
+      }
+
+    }
+    
+    .send-box{
+      margin-top: 5%;
+      border: 1px solid #1fd882;
+      background-color: #91a0a7;
+      height: 40px;
+      width:fit-content;
+      padding: 5px;
+      align-items: center;
+      border-radius: 10px;
+      align-self: flex-end;
+
+      .sender{
+        margin: 10px;
+
+      }
+
+    }
+    
+
+
+  }
+
+  .typeBoxContainer{
+    display: flex;
+    flex: 0;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    input{
+      height: 50px;
+      align-items: center;
+      width: 40rem;
+      border: none;
+      border-radius: 20px;
+      margin-right: 10px;
+    }
+    .send-btn{
+      width: 100px;
+      height: 55px;
+      border: none;
+      border-radius:20px ;
+      background-color: rgb(217, 135, 228);
+
+    }
+    
+  }
+
+}

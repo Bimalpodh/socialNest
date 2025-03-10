@@ -1,0 +1,25 @@
+{
+  "name": "socialnest",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.6",
+    "emoji-picker-react": "^4.12.0",
+    "firebase": "^11.4.0",
+    "preact": "^10.25.3",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.1.5",
+    "react-router-dom": "^7.1.5"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.9.3",
+    "autoprefixer": "^10.4.20",
+    "vite": "^6.0.5"
+  }
+}

@@ -1,0 +1,110 @@
+.contain-cart {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  width: 650px;
+  height: 900px;
+  background-color: #fdfdfd;
+  gap: 2;
+}
+.containt {
+ 
+
+  .post-box {
+    height: 600px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+    .user-dl {
+      display: flex;
+      border-top: 1px solid black;
+
+      border-bottom: 1px solid black;
+      background-color: #fdf3f3;
+      opacity: 0.9;
+      width: 650px;
+      height: 80px;
+      .user-profile {
+        border: 1px solid #32a173;
+        height: 50px;
+        width: 50px;
+        margin: 2%;
+        border-radius: 50%;
+        background-image: url("https://i.pinimg.com/564x/f9/17/6b/f9176b60888f3a0572afb842e6724de4.jpg");
+        background-size: cover;
+      }
+      .user-name {
+        font-size: 22px;
+        align-self: center;
+
+      }
+     
+
+
+
+    }
+    .pp{
+      height: 80%;
+
+      .post {
+        
+        
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 650px;
+        height: 465px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img{
+          width: 400px;
+          height: 465px;
+          background-size: cover;
+          display: flex;
+         text-align: center;
+          
+        }
+       
+      }
+      .reactElement{
+        padding-left: 3%;
+        display: flex;
+        justify-content: space-between;
+        background-color: rgb(248, 246, 246);
+        align-self: flex-start;
+
+        div{
+             display: flex;
+             padding: 3%;
+          .love{
+            height: 30px;
+            padding-right: 4%;
+            color: #c53333;
+          }
+          .comment{
+            height: 30px;
+            padding-right: 4%;
+    
+          }
+          .save{
+            height: 30px;
+          }
+        }
+        .shareDIv{
+
+          .share{
+            height: 25px;
+          }
+        }
+      }
+
+    }
+ 
+    
+  }
+}

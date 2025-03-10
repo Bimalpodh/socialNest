@@ -1,0 +1,55 @@
+.Header {
+  width: 200px;
+  height: 100vh;
+  padding-left: 1%;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  background-color: #f8f8f8;
+
+  .header-element {
+    width: 100%;
+    flex-direction: column; 
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: 10%;
+    
+    .bar {
+      display: flex;
+      list-style: none;
+      margin-top: 15%;
+
+      .link {
+        display: flex;
+        text-decoration: none;
+        color: black;
+        .setting {
+          background-image: url("E:\Project\socialNest\src\assets\image\setting1.png");
+          background-repeat: no-repeat;
+          background-size: cover;
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      .Home {
+        background-image: url("E:\Project\socialNest\src\assets\image\home1.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 40px;
+        height: 40px;
+      }
+      .chat {
+        background-image: url("E:\Project\socialNest\src\assets\image\message.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 40px;
+        width: 40px;
+        color: brown;
+      }
+      .nav-name {
+        margin: 14px;
+      }
+    }
+  }
+}

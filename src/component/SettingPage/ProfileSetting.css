@@ -1,0 +1,238 @@
+.profileSettingContainer {
+  flex: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .ProfileHeader {
+    margin-top: 10px;
+    width: 700px;
+    color: #1a1717;
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      color: brown;
+     
+      
+    }
+    button {
+      width: 100px;
+      height: 40px;
+      border-radius: 10px;
+      background-color: #bbc0cc ;
+      border: none;
+      color: #2a4b38;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color:#16c4ca;
+    }
+    
+  }
+
+  .User-Detail {
+    background-color: #bbc0cc;
+    border-radius: 20px;
+    width: 700px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .user-d {
+      display: flex;
+   
+
+      img {
+        border-radius: 50%;
+        height: 60px;
+        width: 60px;
+        margin-top: 6%;
+  
+      }
+
+      
+    .userName {
+      padding-top: 5px;
+      padding-left: 8px; 
+
+      div {
+        font-weight: 400;
+        font-size: 20px;
+      }
+      .profile-name {
+        font-size: 16px;
+        color: #606064;
+      }
+
+    }
+      
+    }
+
+    div{
+      margin: 4%;
+
+      .changeProfileImg-btn{
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 5%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        background-color: #bce2e4;
+        border-radius: 10px;
+        width: 100px;
+        height: 40px;
+        cursor: pointer;
+      }
+      .changeProfileImg-btn:hover{
+        background-color: #77e2a4;
+
+      }
+
+      
+    }
+   
+
+  }
+
+  .offcanvas-form{
+    width: 700px;
+    
+    .form{
+      margin-top: 2%;
+      padding: 3%;
+      background-color: #888d99;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .form-group{
+        margin: 2%;
+        border: 2px solid #914646;
+        border-radius: 10px;
+        padding: 3%;
+        display:flex ;
+        justify-content: space-between;
+
+
+        label{
+          
+          font-size: 20px;
+          text-align: center; 
+          display: flex;
+
+        }
+        input{
+          height: 40px;
+          width: 200px;
+          border-radius: 10px;
+          overflow-x: hidden;
+          border: none;
+          
+
+        }
+        input:hover{
+
+          border: 2px solid #15dac9;
+        }
+
+
+        #zero{
+         
+         
+          
+        }
+        #one{
+            
+        }
+        #two{
+          
+
+        }
+        #three{
+          
+        }
+       
+      }
+
+      .radio-container{
+
+        input{
+          transform: scale(1.0);
+        }
+      }
+
+      .btn-container{
+        display: flex;
+        justify-content: space-between;
+
+        button{
+          height: 40px;
+          width: 100px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .submit{
+          background-color:#0f5a5f;
+          border: none;
+          border-radius: 10px;
+          color: #f2f4fa;
+          cursor: pointer;
+          font-weight: 600;
+        }
+        .submit:hover{
+          background: #3ec476;
+        }
+        .cancel{
+          background-color: #914646;
+          border: none;
+          border-radius: 10px;
+        }
+
+      }
+      
+
+    }
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.Edit-Form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+
+

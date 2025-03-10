@@ -1,0 +1,36 @@
+.story-container {
+  width: 660px; 
+  overflow-x: auto; 
+  overflow-y: hidden;
+  white-space: nowrap;
+  margin: auto;
+  position: relative;
+  scroll-behavior: smooth; 
+  scrollbar-width: none;
+  margin-bottom: 1%;
+}
+
+.story-list {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  transition: transform 0.5s ease-in-out; /* Smooth sliding */
+}
+
+.story-li {
+  flex-shrink: 0;
+  width: 80px;
+  height: 120px;
+  border: 3px solid #0bdf28;
+  border-radius: 10;
+  background-image: url("https://w0.peakpx.com/wallpaper/181/92/HD-wallpaper-keerthi-suresh-actress-beautiful-bollywood-cute-tollywood-traditional.jpg");
+  background-size: cover;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Slide effect when a story is removed */
+.story-li.removed {
+  transform: translateX(-120px); /* Moves left when removed */
+  opacity: 0;
+}

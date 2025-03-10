@@ -1,0 +1,116 @@
+.suggetion {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+
+
+  .logo{
+
+
+    display: flex;
+    justify-content: center;
+
+
+    .bird{
+      background-image: url("https://easydrawingguides.com/wp-content/uploads/2021/01/how-to-draw-a-cartoon-bird-featured-image-1200-1024x834.png");
+      height: 100px;
+      width: 100px;
+      background-size: cover;
+      align-self: center;
+
+    }
+  }
+  .sug-header {
+    display: flex;
+    align-items: center;
+    /* background-color: #f0f; */
+    justify-content: space-between;
+    font-size: 24px;
+  }
+  .sug-container {
+    background-color: rgb(206, 226, 226);
+    border-radius: 5%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 34%;
+ 
+
+    .sug-holder{
+      width: 100%;
+      overflow-y: scroll; 
+      white-space: nowrap; 
+      position: relative;
+      padding: 10px 0;
+      scrollbar-width: none;
+      
+    .frnd-sug {
+     
+      display: flex;
+      justify-content: space-between;
+      border-radius: 30px;
+
+      .sug-profile {
+        display: flex;
+        align-items: center;
+        .frnd-sug-img {
+          flex-shrink: 0;
+          transform: scale(0.8);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+          top: 50%;
+          left: 50%;
+          border-radius: 50%;
+          width: 70px;
+          height: 70px;
+  
+          clip-path: circle(50% at 50% 50%);
+          border: 2px solid #f0f;
+        }
+      }
+      .follow {
+      
+        border-radius: 10px;
+        width: 70px;
+        height: 40px;
+        background: #3038a7;
+        color: #f0f0f0;
+        border: none;
+        align-self: center;
+        margin-bottom: 6px;
+        margin: 1px;
+      }
+    }
+
+    }
+
+  }
+  .SaveContainer {
+    font-size: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+
+    .saveHeader {
+      /* border: 1px solid black; */
+      display: flex;
+      flex-wrap: wrap;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      height: 400px;
+      justify-content: center;
+
+      .your-save {
+        margin: 2px;
+        width: 150px;
+        height: 150px;
+        border: 1px solid black;
+        border-radius: 5px;
+        background-image: url(" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5NYOL-vbivKtGprzy7hmsFwfkcheXe9ADtg&s");
+        background-size: cover;
+        
+      }
+    }
+  }
+}

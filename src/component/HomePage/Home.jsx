@@ -1,13 +1,18 @@
 import React from "react";
-import { Link } from "react-router";
 import "./home.css";
 import Story from "./Story";
 import Post from "./Post";
 import Suggest from "./Suggest";
+import Header from "./Header";
+
+
+
 export default function Home() {
   return (
     <div className="firstContainer">
-  
+      <div>
+        <Header/>
+      </div>
       <div className="Containt-box">
         <div className="story">
           <Story />

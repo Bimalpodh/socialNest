@@ -8,6 +8,7 @@
   
 
   .login-box {
+    margin-top: 15%;
     border: 1px solid #f5efef;
     width: 400px;
     height: auto; /* Ensure it has a defined height */

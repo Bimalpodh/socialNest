@@ -1,12 +1,17 @@
 import "./chat.css";
 import Message from "./Message";
+import Header from "../HomePage/Header";
 
 const Chat = () => {
 
   
   return (
     <div className="chat-box-container">
+            <div>
+          <Header/>
+        </div>
       <div className="chat-box">
+
         <div className="Chat-Header">
           <h3>Bimal_babu_08</h3>
           <div className="search-container">

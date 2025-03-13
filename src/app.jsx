@@ -1,21 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import appStore from "./component/ReduxStore/appStore.jsx";
 
 import Header from "./component/HomePage/Header.jsx";
 import Home from "./component/HomePage/Home.jsx";
 import Setting from "./component/SettingPage/Setting.jsx";
 import Chat from "./component/Messanger/Chat.jsx";
-import Login from "../src/component/Login/Login.jsx"
+import Login from "./component/Login/Login.jsx";
 import "./app.css";
-
 
 // Layout component to wrap routes
 const AppLayout = () => {
   return (
     <div className="app">
-      
-      <Header/>
       <Outlet />
     </div>
   );
@@ -25,32 +24,35 @@ const AppLayout = () => {
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />, // Root layout with Header
+    element: <AppLayout />,
     children: [
       {
-        index: true, // This makes Home the default child route
+        index: true,
+        element: <Login />,
+      },
+      {
+        path: "/home",
         element: <Home />,
       },
       {
-        path: "home", // `/home` still works explicitly
-        element: <Home />,
-      },
-      {
-        path: "setting",
+        path: "/setting",
         element: <Setting />,
       },
       {
-        path:"/chat",
-        element:<Chat/>,
-      }
+        path: "/chat",
+        element: <Chat />,
+      },
     ],
   },
 ]);
 
-// Render the App
-const root=ReactDOM.createRoot(document.getElementById("root"));
+// Render the App with Redux Provider
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={appRouter} />
+    <Provider store={appStore}>
+      <RouterProvider router={appRouter} />
+    </Provider>
   </React.StrictMode>
 );
+

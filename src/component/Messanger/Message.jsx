@@ -1,6 +1,5 @@
 import { useState } from "preact/hooks";
 import "./chat.css";
-
 const Message = () => {
   const [recieverProfile, setRecieverProfile] = useState();
 

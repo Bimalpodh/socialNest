@@ -1,39 +1,90 @@
 .Header {
-  width: 200px;
+  width: 300px;
   height: 100vh;
   padding-left: 1%;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   background-color: #f8f8f8;
 
-  .logDiv{
+  .logDiv {
     display: flex;
-    padding: 4px;
-    margin: 4px;
-    div{
-      img{
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        background-size: cover;
-       
-      }
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  
+    div {
+      display: flex;
+      align-items: center;
     }
-    p{
-      padding-left: 10px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #1eb32b;
+  
+    /* Profile Image */
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+  
+    img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      border: 2px solid #1eb32b;
+      object-fit: cover;
+      transition: transform 0.3s ease-in-out;
+    }
+  
+    img:hover {
+      transform: scale(1.1);
+    }
+  
+    /* Logout Button */
+    .logBtn {
+      margin-left: 12px;
+      padding: 6px 12px;
+      background-color: #e74c3c;
+      color: #ffffff;
+      font-size: 14px;
       font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+  
+    .logBtn:hover {
+      background-color: #c0392b;
+      transform: scale(1.05);
+    }
+  
+    /* Username Styling */
+    .headerProfile {
+      margin-left: 12px;
+    }
+  
+    .userName {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      text-transform: capitalize;
+      transition: color 0.3s ease-in-out;
+    }
+  
+    .userName:hover {
+      color: #1eb32b;
+    }
   }
-}
+  
+
   .header-element {
     width: 100%;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
     margin-top: auto;
     margin-bottom: 10%;
-    
+
     .bar {
       display: flex;
       list-style: none;
@@ -41,34 +92,18 @@
 
       .link {
         display: flex;
+        align-items: center;
         text-decoration: none;
         color: black;
-        .setting {
-          background-image: url("E:\Project\socialNest\src\assets\image\setting1.png");
-          background-repeat: no-repeat;
-          background-size: cover;
+
+        .nav-icon {
           width: 40px;
           height: 40px;
         }
-      }
 
-      .Home {
-        background-image: url("E:\Project\socialNest\src\assets\image\home1.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        width: 40px;
-        height: 40px;
-      }
-      .chat {
-        background-image: url("E:\Project\socialNest\src\assets\image\message.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 40px;
-        width: 40px;
-        color: brown;
-      }
-      .nav-name {
-        margin: 14px;
+        .nav-name {
+          margin-left: 14px;
+        }
       }
     }
   }

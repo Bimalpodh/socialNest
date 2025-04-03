@@ -1,0 +1,59 @@
+.notification-bar {
+  position: fixed;
+  top: 0;
+  left: -400px;
+  width: 400px;
+  height: 100vh;
+  background: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.notification-bar.show {
+  left: 0;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #062342;
+  color: white;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 0 10px;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #6b140d; /* red on hover */
+}
+
+
+.notification-list {
+  padding: 10px;
+}
+
+.notification-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.notif-time {
+  font-size: 12px;
+  color: rgb(160, 33, 33);
+}
+
+.no-notifications {
+  text-align: center;
+  padding: 20px;
+  color: gray;
+}

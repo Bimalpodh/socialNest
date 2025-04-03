@@ -1,0 +1,194 @@
+/* Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup Container */
+.popup-content {
+  background: #fff;
+  width: 520px;
+  max-width: 95%;
+  max-height: 85vh;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  position: relative;
+  animation: fadeInUp 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.close-btn:hover {
+  color: #000;
+}
+
+/* Heading */
+h2 {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  text-align: center;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.upload{
+
+  display: block;
+  width: 200px;
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 8px;
+  margin: 10px auto;
+  text-align: center;
+  cursor: pointer;
+
+}
+
+/* File Input */
+input[type="file"] {
+  display: none;
+}
+
+/* Image/Video Preview */
+.preview-container {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.preview-image {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 12px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs */
+.caption-input {
+  width: 95%;
+  height: 120px; /* Increased height */
+  padding: 0.75rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  resize: vertical; /* Allow vertical resizing */
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  line-height: 1.4;
+}
+.caption-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+  outline: none;
+}
+
+.mention-input {
+  width: 95%;
+  padding: 0.75rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+.mention-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+  outline: none;
+}
+
+/* Tag Button */
+.tag-btn {
+  background: #3498db;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+  margin-bottom: 1rem;
+}
+.tag-btn:hover {
+  background: #2980b9;
+}
+
+/* Tagged Users Display */
+.tagged-users {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+.tagged-user {
+  display: inline-flex;
+  align-items: center;
+  background: #ecf0f1;
+  color: #2c3e50;
+  padding: 0.4rem 0.8rem;
+  margin: 0.2rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+.remove-tag-btn {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Upload Button (Sticky Footer Style) */
+.upload-btn {
+  position: sticky;
+  bottom: 0;
+  padding: 0.8rem;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+}
+.upload-btn:hover {
+  background: #1e8449;
+}

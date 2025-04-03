@@ -63,3 +63,5 @@
   - Styling: CSS, TailwindCSS (optional)
   - State Management: Redux Toolkit
   - Deployment: Vercel, Firebase Hosting (optional)
+
+  

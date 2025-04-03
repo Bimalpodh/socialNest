@@ -1,199 +1,84 @@
-.chat-box-container{
+.chat-box-container {
   width: 100%;
+  height: 100vh;
   display: flex;
   border: 1px solid black;
   background-color: rgb(203, 212, 209);
+  overflow: hidden;
   
-
-  .chat-box{
+  .chat-box {
     flex: 1;
-    width: 350px;
-    max-height: 100vh;
+    max-width: 350px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #fff;
-
-    .Chat-Header{
-      border-bottom: 3px solid #3b5549;
+    border-right: 2px solid #3b5549;
+    
+    .Chat-Header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
       background-color: #809189;
-      h3{
+      border-bottom: 3px solid #3b5549;
+      
+      h3 {
         color: #0a1312;
-
-      }
-      .search-container{
-        display: flex;
-        border: 1px solid  #3b5549;
-        input{
-          height: 30px;
-          width:80%;
-          align-self: center;
-
-        }
-        img{
-          padding: 4px;
-          height: 40px;
-          align-items: center;
-        }
+        margin-bottom: 5px;
       }
     }
 
-    .friends-List{
+    .search-container {
+      width: 90%;
       display: flex;
-      margin-top: auto;
-      flex-direction: column;
+      align-items: center;
+      border: 1px solid #3b5549;
+      padding: 5px;
+      background: #fff;
+      border-radius: 5px;
       
-      position: relative;
-      overflow-y: scroll;
+      input {
+        height: 30px;
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        padding-left: 8px;
+      }
+    }
+
+    .friends-List {
+      flex: 1;
+      overflow-y: auto;
       scroll-behavior: smooth;
       scrollbar-width: none;
-
-
-      .friends{
-        margin: 10px;
+      padding: 10px;
+      
+      .friend-item {
         display: flex;
         align-items: center;
-  
-        img{
-          border: 1px solid #1fd882;
+        padding: 10px;
+        cursor: pointer;
+        transition: background 0.3s;
+        
+        &:hover {
+          background: #eef2f1;
+        }
+
+        img {
           height: 50px;
           width: 50px;
           border-radius: 50%;
-       
+          border: 2px solid #1fd882;
+          margin-right: 10px;
         }
-        label{
-          padding-left: 4%;
+
+        div {
+          font-size: 16px;
+          font-weight: bold;
         }
       }
-
     }
-  
-
   }
-  .message-container{
-    flex: 3;
-  }
-
-}
-
-/* Message Component css */
-
-.message-container{
-  display: flex;
-  flex-direction: column;
-  .messageHeader{
-    
-    border-bottom: 1px solid #918c8c;
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    .profileContainer{
-      display: flex;
-      align-items: center;
-      margin: 20px;
-
-      img{
-        
-        height: 60px;
-        width: 60px;
-        background-image: cover;
-        border-radius: 50%;
-        margin-right: 10px;
-  
-      }
-      label{
-        font-size: 20px;
-
-
-      }
-    }
-    .contact{
-
-      .icon{
-
-        height: 40px;
-      }
-    }
-   
-
-  }
-
-  .message-box{
-    font-family: 'Gill Sans', 'Gill Sans MT', "Calibri", 'Trebuchet MS', sans-serif;
-    padding: 10px;
-    margin-top: 5px;
-    display: flex;
-    flex-direction: column-reverse;
-
-    flex: 9;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-
-    .reciev-box{
-      display: flex;
-      flex-direction: column;
-        border: 1px solid #1fd882;
-        background-color: #91a0a7;
-        height: 40px;
-        width: fit-content;
-        align-items: center;
-        border-radius: 10px;
-        padding: 5px;
-
-
-      .reciever{
-        margin-top: 10px;
-
-      }
-
-    }
-    
-    .send-box{
-      margin-top: 5%;
-      border: 1px solid #1fd882;
-      background-color: #91a0a7;
-      height: 40px;
-      width:fit-content;
-      padding: 5px;
-      align-items: center;
-      border-radius: 10px;
-      align-self: flex-end;
-
-      .sender{
-        margin: 10px;
-
-      }
-
-    }
-    
-
-
-  }
-
-  .typeBoxContainer{
-    display: flex;
-    flex: 0;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-    input{
-      height: 50px;
-      align-items: center;
-      width: 40rem;
-      border: none;
-      border-radius: 20px;
-      margin-right: 10px;
-    }
-    .send-btn{
-      width: 100px;
-      height: 55px;
-      border: none;
-      border-radius:20px ;
-      background-color: rgb(217, 135, 228);
-
-    }
-    
-  }
-
 }

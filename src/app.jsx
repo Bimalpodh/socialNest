@@ -3,13 +3,16 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import appStore from "./component/ReduxStore/appStore.jsx";
-
-import Header from "./component/HomePage/Header.jsx";
+import AuthHandler from "./component/Login/AuthHandler.jsx";
 import Home from "./component/HomePage/Home.jsx";
 import Setting from "./component/SettingPage/Setting.jsx";
 import Chat from "./component/Messanger/Chat.jsx";
 import Login from "./component/Login/Login.jsx";
 import "./app.css";
+import Profile from "./component/ProfilePage/Profile.jsx";
+import FriendsProfile from "./component/friendsProfile/FriendsProfile.jsx";
+import PostDetail from "./component/PostDetails/Postdetail.jsx";
+
 
 // Layout component to wrap routes
 const AppLayout = () => {
@@ -24,15 +27,19 @@ const AppLayout = () => {
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: <AuthHandler />, // Global auth management
     children: [
       {
-        index: true,
+        path: "/",
         element: <Login />,
       },
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "/setting",
@@ -42,6 +49,18 @@ const appRouter = createBrowserRouter([
         path: "/chat",
         element: <Chat />,
       },
+      {
+        path: "/friendprofile",
+        element: <FriendsProfile />,
+      },
+      {
+        path: "/post/:postId",
+        element: <PostDetail />,
+      },
+      // {
+      //   path: "/storypopUp",
+      //   element: <StoryPopUp />,
+      // },
     ],
   },
 ]);

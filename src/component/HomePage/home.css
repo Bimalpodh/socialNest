@@ -5,9 +5,11 @@
   box-sizing: border-box;
   display: flex;
   border-left: 1px solid #ccc8c8;
+  
+
 
   .Containt-box {
-    background-color: #e2e7de;
+    background: linear-gradient(to right, #232526, #414345);
     display: flex;
     flex: 3;
     flex-direction: column;
@@ -17,19 +19,21 @@
     align-items: center;
 
     .types {
-      background-color: rgb(161, 161, 161);
+      background-color: #0077B5;
       border: 1px solid rgb(138, 128, 128);
       border-left: none;
       border-right: none;
-      width: 650px;
-      border-radius: 10px;
+      width: 930px;
+      border-radius: 1px;
       display: flex;
       justify-content: flex-end;
       .type {
         display: flex;
         width: fit-content;
+        cursor: pointer;
+
         
-        height: 20px;
+        height: 5px;
         font-size: 20px;
         justify-content: space-between;
         color: rgb(155, 240, 240);
@@ -37,7 +41,7 @@
         list-style: none;
 
         li{
-          margin: 10px;
+          margin-right: 20px;
         }
 
       }

@@ -1,47 +1,81 @@
-import { useState } from "preact/hooks";
-import "./chat.css";
-const Message = () => {
-  const [recieverProfile, setRecieverProfile] = useState();
+import { useEffect, useState } from "react";
+import { auth, db } from "../Utils/firebase";
+import { collection, addDoc, query, orderBy, onSnapshot, doc, getDoc } from "firebase/firestore";
+import "./message.css";
+
+const Message = ({ friend }) => {
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const currentUser = auth.currentUser;
+
+  if (!currentUser || !friend) return null;
+  
+  const chatId = [currentUser.uid, friend.id].sort().join("_");
+
+  useEffect(() => {
+    const messagesRef = collection(db, "chats", chatId, "messages");
+    const q = query(messagesRef, orderBy("timestamp"));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setMessages(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    });
+
+    return () => unsubscribe();
+  }, [chatId]);
+
+  const sendMessage = async () => {
+    if (!newMessage.trim()) return;
+    
+    const currentUserRef = doc(db, "users", currentUser.uid);
+    const friendRef = doc(db, "users", friend.id);
+    
+    const currentUserSnap = await getDoc(currentUserRef);
+    const friendSnap = await getDoc(friendRef);
+    
+    if (
+      currentUserSnap.exists() && 
+      friendSnap.exists() && 
+      currentUserSnap.data().friends.includes(friend.id) && 
+      friendSnap.data().friends.includes(currentUser.uid)
+    ) {
+      const messagesRef = collection(db, "chats", chatId, "messages");
+      await addDoc(messagesRef, {
+        senderId: currentUser.uid,
+        receiverId: friend.id,
+        text: newMessage,
+        timestamp: new Date(),
+      });
+      setNewMessage("");
+    } else {
+      alert("You must be mutual friends to send messages.");
+    }
+  };
 
   return (
     <div className="message-container">
       <div className="messageHeader">
         <div className="profileContainer">
-          <img src="https://imgs.search.brave.com/z_7_jZD7O6KpJ9M4Lgjl3JWhbrO49elKcD2vBIU1M6A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1QlptVTJOV0Zt/TUdJdE5UbGlNaTAw/WVRNMkxXSXhaakV0/WlRVNVpUaGlNak15/WlRJeFhrRXlYa0Zx/Y0djQC5qcGc"></img>
-          <label>sai_pallavi</label>
-        </div>
-        <div className="contact">
-          <img
-            className="icon"
-            src="./src/assets/image/call.png"
-            alt="call"
-            srcset=""
-          />
-          <img
-            className="icon"
-            src="./src/assets/image/videocall.png"
-            alt=""
-            srcset=""
-          />
+          <img src={friend.photoURL} alt={friend.displayName} />
+          <label>{friend.displayName}</label>
         </div>
       </div>
-      <div className="message-box">
 
-        {Array.from({length:100},(_,i)=>(
-         <>
-          <div className="reciev-box">
-          <div className="reciever">Hello</div>
+      <div className="message-box">
+        {messages.map((msg) => (
+          <div key={msg.id} className={msg.senderId === currentUser.uid ? "send-box" : "reciev-box"}>
+            <div className={msg.senderId === currentUser.uid ? "sender" : "reciever"}>{msg.text}</div>
           </div>
-          <div className="send-box">
-            <div className="sender">Hiii</div>
-          </div></>
         ))}
-        
-       
       </div>
+
       <div className="typeBoxContainer">
-        <input type="text" />
-        <button className="send-btn" type="button">Send</button>
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Type a message..."
+        />
+        <button className="send-btn" onClick={sendMessage}>Send</button>
       </div>
     </div>
   );

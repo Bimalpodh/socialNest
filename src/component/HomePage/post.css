@@ -1,110 +1,178 @@
 .contain-cart {
   flex: 3;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   overflow-y: scroll;
   scrollbar-width: none;
-  width: 650px;
-  height: 900px;
-  background-color: #fdfdfd;
-  gap: 2;
 }
-.containt {
- 
 
+/* Hide scrollbar in Chrome & Safari */
+.contain-cart::-webkit-scrollbar {
+  display: none;
+}
+
+.containt {
   .post-box {
-    height: 600px;
+    height: fit-content;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 25px;
+    background-color: aliceblue;
+
     .user-dl {
       display: flex;
-      border-top: 1px solid black;
+      background-color: #9fa5b4;
+      /* opacity: 0.9; */
+      width: 100%;
+      height: 50px;
 
-      border-bottom: 1px solid black;
-      background-color: #fdf3f3;
-      opacity: 0.9;
-      width: 650px;
-      height: 80px;
       .user-profile {
         border: 1px solid #32a173;
-        height: 50px;
-        width: 50px;
+        height: 30px;
+        width: 30px;
         margin: 2%;
         border-radius: 50%;
-        background-image: url("https://i.pinimg.com/564x/f9/17/6b/f9176b60888f3a0572afb842e6724de4.jpg");
         background-size: cover;
+        background-position: center;
       }
+
       .user-name {
-        font-size: 22px;
+        font-size: 18px;
         align-self: center;
-
       }
-     
-
-
-
     }
-    .pp{
-      height: 80%;
+
+    .pp {
+      margin: 3px;
+      background-color: aliceblue;
+      height: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
       .post {
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+        max-width: 900px;
+        height: 70%;
+        overflow: hidden;
+        margin: 5px auto;
+        border-radius: 10px; 
         
-        
-        background-size: cover;
-        background-repeat: no-repeat;
-        width: 650px;
-        height: 465px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
-
-        img{
-          width: 400px;
-          height: 465px;
-          background-size: cover;
-          display: flex;
-         text-align: center;
-          
+        video {
+          width: 100%;
+          height: 500px;
+          object-fit: cover;
+          border-radius: 10px;
+          transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
-       
+
+        img {
+          height: 70%;
+          width: 80%;
+          align-items: center;
+          display: flex;
+          justify-content: ;
+          object-fit: cover;
+        }
       }
-      .reactElement{
-        padding-left: 3%;
+
+      .reactElement {
         display: flex;
         justify-content: space-between;
-        background-color: rgb(248, 246, 246);
         align-self: flex-start;
+        width: 100%;
+        border-bottom: 1px solid;
+        cursor: pointer;
 
-        div{
-             display: flex;
-             padding: 3%;
-          .love{
-            height: 30px;
-            padding-right: 4%;
-            color: #c53333;
+        div {
+          display: flex;
+          height: 40px;
+          align-items: center;
+          .love {
+            cursor: pointer;
+            font-size: 35px;
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+            margin-bottom: 10px;
           }
-          .comment{
-            height: 30px;
-            padding-right: 4%;
-    
+          .love:active {
+            transform: scale(1.2);
           }
-          .save{
-            height: 30px;
+          @keyframes pop {
+            0% {
+              transform: scale(1);
+            }
+            50% {
+              transform: scale(1.4);
+            }
+            100% {
+              transform: scale(1);
+            }
+          }
+
+          .love.liked {
+            animation: pop 0.2s ease-in-out;
+            color: red; /* Optional: Change color when liked */
+          }
+          .comment {
+            height: 40px;
+            margin-right: 15px;
+            margin-left: 15px;
+          }
+          .save {
+            height: 40px;
           }
         }
-        .shareDIv{
 
-          .share{
-            height: 25px;
+        .shareDIv {
+          .share {
+            margin: 12px;
+            height: 30px;
           }
         }
       }
 
+      .bottom {
+        margin: 0;
+
+        p {
+          margin: 4px;
+        }
+
+        .userDesc {
+          display: flex;
+
+          .userName {
+            font-weight: bold;
+            color: #32a173;
+          }
+        }
+
+        .latestComment {
+          display: flex;
+        }
+      }
     }
- 
-    
+  }
+}
+
+
+@media (max-width: 768px) {
+  .post {
+    width: 90%;
+    max-height: 40vh;
+  }
+  
+  .post video, 
+  .post img {
+    max-height: 250px; /* Smaller height for mobile screens */
   }
 }

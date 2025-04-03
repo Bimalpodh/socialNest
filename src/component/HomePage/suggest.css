@@ -28,6 +28,7 @@
     /* background-color: #f0f; */
     justify-content: space-between;
     font-size: 24px;
+    cursor: pointer;
   }
   .sug-container {
     background-color: rgb(206, 226, 226);
@@ -35,6 +36,7 @@
     overflow-y: scroll;
     scrollbar-width: none;
     height: 34%;
+
  
 
     .sug-holder{
@@ -44,6 +46,24 @@
       position: relative;
       padding: 10px 0;
       scrollbar-width: none;
+      overflow: hidden;
+    .frndSearch{
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      input{
+        width: 240px;
+        height: 30px;
+        border: none;
+
+      }
+      .searchImg{
+            height: 30px;
+            background-color: #181e72;
+            color: #f0f0f0;
+          
+      }
+    }
       
     .frnd-sug {
      
@@ -54,6 +74,7 @@
       .sug-profile {
         display: flex;
         align-items: center;
+        cursor: pointer;
         .frnd-sug-img {
           flex-shrink: 0;
           transform: scale(0.8);
@@ -69,7 +90,7 @@
         }
       }
       .follow {
-      
+        
         border-radius: 10px;
         width: 70px;
         height: 40px;
@@ -79,6 +100,7 @@
         align-self: center;
         margin-bottom: 6px;
         margin: 1px;
+        cursor: pointer;
       }
     }
 
@@ -109,6 +131,7 @@
         border-radius: 5px;
         background-image: url(" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5NYOL-vbivKtGprzy7hmsFwfkcheXe9ADtg&s");
         background-size: cover;
+        cursor: pointer;
         
       }
     }

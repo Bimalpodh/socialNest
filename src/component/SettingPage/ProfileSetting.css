@@ -3,236 +3,197 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Poppins", sans-serif;
+  background-color: #f4f4f8;
+  padding: 20px;
+
   .ProfileHeader {
-    margin-top: 10px;
-    width: 700px;
+    width: 50%;
     color: #1a1717;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
 
-    h3 {
-      color: brown;
-     
-      
-    }
+
     button {
-      width: 100px;
-      height: 40px;
-      border-radius: 10px;
-      background-color: #bbc0cc ;
+      background-color: #5a67d8;
+      color: white;
       border: none;
-      color: #2a4b38;
-      font-size: 20px;
+      padding: 10px 15px;
+      border-radius: 8px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: #434190;
+      }
     }
-    button:hover {
-      background-color:#16c4ca;
-    }
-    
   }
 
   .User-Detail {
-    background-color: #bbc0cc;
+    background-color: #fff;
     border-radius: 20px;
-    width: 700px;
-    height: 80px;
+    width: 750px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
     .user-d {
       display: flex;
-   
+      align-items: center;
 
-      img {
-        border-radius: 50%;
-        height: 60px;
-        width: 60px;
-        margin-top: 6%;
-  
+      .profile-img-wrapper {
+        position: relative;
+
+        img {
+          border-radius: 50%;
+          height: 80px;
+          width: 80px;
+          object-fit: cover;
+          border: 3px solid #5a67d8;
+          transition: 0.3s;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+
+        .camera-icon {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background: #5a67d8;
+          color: white;
+          border-radius: 50%;
+          padding: 6px;
+          cursor: pointer;
+          transition: 0.3s;
+
+          &:hover {
+            background-color: #434190;
+          }
+        }
       }
 
-      
-    .userName {
-      padding-top: 5px;
-      padding-left: 8px; 
+      .userName {
+        padding-left: 12px;
 
-      div {
-        font-weight: 400;
-        font-size: 20px;
-      }
-      .profile-name {
-        font-size: 16px;
-        color: #606064;
-      }
+        .display-name {
+          font-size: 20px;
+          font-weight: bold;
+        }
 
+        .profile-name {
+          font-size: 14px;
+          color: #666;
+        }
+      }
     }
-      
-    }
 
-    div{
-      margin: 4%;
+    .changeProfileImg-btn {
+      background-color: #5a67d8;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
 
-      .changeProfileImg-btn{
-        border: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 5%;
-        margin-top: 2%;
-        margin-bottom: 2%;
-        background-color: #bce2e4;
-        border-radius: 10px;
-        width: 100px;
-        height: 40px;
-        cursor: pointer;
-      }
-      .changeProfileImg-btn:hover{
-        background-color: #77e2a4;
-
+      &:hover {
+        background-color: #434190;
       }
 
-      
+      &:disabled {
+        background-color: #a0aec0;
+        cursor: not-allowed;
+      }
     }
-   
-
   }
 
-  .offcanvas-form{
-    width: 700px;
-    
-    .form{
-      margin-top: 2%;
-      padding: 3%;
-      background-color: #888d99;
-      border-radius: 10px;
+  .offcanvas-form {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin-top: 20px;
+
+    .form {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      .form-group{
-        margin: 2%;
-        border: 2px solid #914646;
-        border-radius: 10px;
-        padding: 3%;
-        display:flex ;
-        justify-content: space-between;
 
+      .form-group {
+        margin-bottom: 15px;
 
-        label{
-          
-          font-size: 20px;
-          text-align: center; 
-          display: flex;
-
-        }
-        input{
-          height: 40px;
-          width: 200px;
-          border-radius: 10px;
-          overflow-x: hidden;
-          border: none;
-          
-
-        }
-        input:hover{
-
-          border: 2px solid #15dac9;
+        label {
+          font-weight: bold;
+          display: block;
+          margin-bottom: 5px;
         }
 
+        input {
+          width: 90%;
+          padding: 10px;
+          border: 2px solid #5a67d8;
+          border-radius: 8px;
+          font-size: 16px;
+          transition: 0.3s;
 
-        #zero{
-         
-         
-          
-        }
-        #one{
-            
-        }
-        #two{
-          
-
-        }
-        #three{
-          
-        }
-       
-      }
-
-      .radio-container{
-
-        input{
-          transform: scale(1.0);
+          &:focus {
+            border-color: #434190;
+            outline: none;
+          }
         }
       }
 
-      .btn-container{
+      .btn-container {
         display: flex;
         justify-content: space-between;
 
-        button{
-          height: 40px;
-          width: 100px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .submit{
-          background-color:#0f5a5f;
-          border: none;
-          border-radius: 10px;
-          color: #f2f4fa;
+        .submit {
+          background-color: #28a745;
+          color: white;
+          padding: 10px 15px;
+          border-radius: 8px;
           cursor: pointer;
-          font-weight: 600;
-        }
-        .submit:hover{
-          background: #3ec476;
-        }
-        .cancel{
-          background-color: #914646;
+          transition: 0.3s;
           border: none;
-          border-radius: 10px;
+
+          &:hover {
+            background-color: #218838;
+          }
+
+          &:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+          }
         }
 
-      }
-      
+        .cancel {
+          background-color: #dc3545;
+          color: white;
+          padding: 10px 15px;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: 0.3s;
+          border: none;
 
+          &:hover {
+            background-color: #c82333;
+          }
+        }
+      }
     }
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.Edit-Form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-
-
-
-

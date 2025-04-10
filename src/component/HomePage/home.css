@@ -1,55 +1,50 @@
 .firstContainer {
-
   height: calc(100vh - 2px);
   width: 100%;
-  box-sizing: border-box;
   display: flex;
+  box-sizing: border-box;
   border-left: 1px solid #ccc8c8;
-  
-
-
-  .Containt-box {
-    background: linear-gradient(to right, #232526, #414345);
-    display: flex;
-    flex: 3;
-    flex-direction: column;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .types {
-      background-color: #0077B5;
-      border: 1px solid rgb(138, 128, 128);
-      border-left: none;
-      border-right: none;
-      width: 930px;
-      border-radius: 1px;
-      display: flex;
-      justify-content: flex-end;
-      .type {
-        display: flex;
-        width: fit-content;
-        cursor: pointer;
-
-        
-        height: 5px;
-        font-size: 20px;
-        justify-content: space-between;
-        color: rgb(155, 240, 240);
-        align-items: center;
-        list-style: none;
-
-        li{
-          margin-right: 20px;
-        }
-
-      }
-    }
-   
-  }
-
 }
 
+.firstContainer .Containt-box {
+  flex: 3;
+  /* background: linear-gradient(135deg, #2c3e50, #4b6584); Dark gradient */
+  background-color: rgba(33, 33, 33, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+}
 
+.firstContainer .Containt-box .types {
+  background: rgba(0, 119, 181, 0.9); /* LinkedIn blue */
+  border: none;
+  width: 930px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  padding: 15px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+.firstContainer .Containt-box .types .type {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+}
+
+.firstContainer .Containt-box .types .type li {
+  font-size: 18px;
+  font-weight: bold;
+  color: #e0f7fa; /* Soft cyan */
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.firstContainer .Containt-box .types .type li:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+}

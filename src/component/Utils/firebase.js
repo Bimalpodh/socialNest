@@ -4,6 +4,8 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -26,3 +28,19 @@ const analytics = getAnalytics(app);
 export const auth=getAuth();
 export const db=getFirestore(app)
 export const storage=getStorage(app);
+
+
+const generateRecaptcha = () => {
+  if (!window.recaptchaVerifier) {
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      "recaptcha-container",
+      {
+        size: "invisible",
+        callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+        },
+      },
+      auth
+    );
+  }
+};

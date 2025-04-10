@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #f7f7f7;
+  background-color: rgb(33, 33, 33);
 
   .messageHeader {
     border-bottom: 1px solid #918c8c;
@@ -39,33 +39,74 @@
     display: flex;
     flex-direction: column;
 
-    .reciev-box {
+    .receive-box {
       align-self: flex-start;
-      background-color: #91a0a7;
+      background-color: rgb(48, 48, 48);
       color: white;
       padding: 10px;
+      margin: 10px;
       border-radius: 10px;
-      margin-bottom: 10px;
       max-width: 60%;
+      display: flex;
+      flex-direction: column;
+      border-bottom-left-radius: 0px;
+      word-break: break-all;
+      .mm {
+        font-size: 20px;
+      }
+      span {
+        font-size: 10px;
+      }
     }
 
     .send-box {
+      display: flex;
+      flex-direction: column;
       align-self: flex-end;
-      background-color: #1fd882;
+      background-color: rgb(48, 48, 48);
       color: white;
       padding: 10px;
       border-radius: 10px;
+     border-bottom-right-radius: 0px;
       margin-bottom: 10px;
       max-width: 60%;
+      word-break: break-all;
+      .mm {
+        font-size: 20px;
+      }
+      span {
+        font-size: 10px;
+      }
+    }
+  }
+  .suggetion {
+    display: flex;
+    .suggetion-msg {
+      display: flex;
+      color: #666;
+      align-items: flex-end;
+      height: 50px;
+      .suggestion-item {
+        margin-left: 10px;
+        border: 1px solid black;
+        height: auto;
+        width: auto;
+        border-radius: 5px;
+        padding: 0px 5px;
+        line-break: anywhere;
+      }
+
     }
   }
 
   .typeBoxContainer {
+   
     display: flex;
     align-items: center;
     padding: 10px;
     background: #ffffff;
     border-top: 1px solid #ddd;
+   
 
     input {
       flex: 1;

@@ -35,8 +35,9 @@
       align-items: center;
       border: 1px solid #3b5549;
       padding: 5px;
-      background: #fff;
+      
       border-radius: 5px;
+      flex-direction: column;
       
       input {
         height: 30px;
@@ -45,6 +46,10 @@
         outline: none;
         font-size: 14px;
         padding-left: 8px;
+      }
+      .search-results{
+        position: absolute;
+        transition: translate(-50%,-50%);
       }
     }
 

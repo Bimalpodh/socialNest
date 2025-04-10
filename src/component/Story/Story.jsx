@@ -102,6 +102,7 @@ const Story = () => {
                   <div className="green-circle"></div> // Green circle for uploaded stories
                 ) : null}
               </div>
+              
               {story.mediaUrl.endsWith("mp4") ? (
                 <>
                   <video src={story.mediaUrl}></video>

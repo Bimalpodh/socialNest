@@ -1,0 +1,27 @@
+.req{
+  display: flex;
+  margin-left: 15px;
+  
+ 
+
+  .unfriend{
+    background-color:#20e7ee;
+    color: rgb(6, 82, 224);
+    margin: 3px;
+    border: none;
+    height: 30px;
+    border-radius: 5px;
+  }
+  .mssg{
+    margin: 3px;
+    background-color: #23eb98;
+    color: rgb(79, 96, 128);
+    font-weight: bold;
+    border: none;
+    height: 30px;
+    border-radius: 5px;
+
+    
+
+  }
+}

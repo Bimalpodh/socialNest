@@ -1,10 +1,13 @@
 import { useEffect, useState } from "preact/hooks";
 import { useSelector } from "react-redux";
 import { auth, db } from "../Utils/firebase";
-import { doc, collection, getDocs, getDoc, updateDoc } from "firebase/firestore";
+import { doc, collection, getDocs, getDoc, updateDoc, arrayUnion, onSnapshot, query, orderBy } from "firebase/firestore";
 import "./post.css";
 import Comments from "../comment/Comments";
 import defaultProfilePic from "../../assets/image/user1.png";
+
+
+
 
 const Post = () => {
   const currentUser = useSelector((store) => store.allUser);
@@ -24,28 +27,33 @@ const Post = () => {
       }
     }, [user, allUser]);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      if (auth.currentUser) {
-        try {
-          const userRef = await getDocs(collection(db, "posts"));
-          let postsArray = userRef.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-
-          // Sort by most recent
-          postsArray.sort((a, b) => b.timestamp?.toMillis() - a.timestamp?.toMillis());
-
-          setPosts(postsArray);
-        } catch (error) {
-          console.error("Error fetching posts:", error);
-        }
-      }
-    };
-
-    fetchPosts();
-  }, []);
+    useEffect(() => {
+      if (!auth.currentUser) return;
+    
+      const postsRef = collection(db, "posts");
+    
+      // Optionally order by timestamp descending
+      const q = query(postsRef, orderBy("timestamp", "desc"));
+    
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const postsArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })).filter(
+          (post) =>
+            post.visibility === "visible" ||
+            post.userId === auth.currentUser.uid ||
+            post.accountType === "public" ||
+            user.following.includes(post.userId)
+        );
+    
+        setPosts(postsArray);
+      }, (error) => {
+        console.error("Error fetching real-time posts:", error);
+      });
+    
+      return () => unsubscribe();
+    }, [user.following]);
 
   const handleLike = async (postId) => {
     if (!auth.currentUser) return;
@@ -91,6 +99,14 @@ const Post = () => {
     return false;
   });
 
+  const handleCollection=async(pid)=>{
+    const userRef=doc(db,"users",auth.currentUser.uid);
+    await updateDoc(userRef,{
+      myCollection: arrayUnion(pid)
+    })
+
+  }
+
   return (
     <div className="contain-cart">
       {commentBox && <Comments postid={CpostId} onClose={closeCommentBox} />}
@@ -116,11 +132,11 @@ const Post = () => {
           <div key={p.id} className="post-box">
             <div className="user-dl">
               <img
-                src="https://m.media-amazon.com/images/I/81KQyAE5LiL.jpg"
+                src={p.photoURL}
                 className="user-profile"
                 alt="User profile"
               />
-              <div className="user-name">{p.userName}</div>
+              <div className="user-name">{p?.userName}</div>
             </div>
 
             <div className="pp">
@@ -149,7 +165,7 @@ const Post = () => {
                     onClick={() => toggleCommentBox(p.id)}
                   />
 
-                  <img className="save" src="./src/assets/image/bookmark.png" alt="Save" />
+                  <img className="save" src="./src/assets/image/bookmark.png" alt="Save" onClick={()=>handleCollection(p.id)} />
                 </div>
                 <div className="shareDIv">
                   <img className="share" src="./src/assets/image/share2.png" alt="Share" />

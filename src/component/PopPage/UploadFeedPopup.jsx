@@ -5,6 +5,7 @@ import { db, auth } from "../Utils/firebase";
 import {doc, addDoc, arrayUnion, collection, serverTimestamp, updateDoc } from "firebase/firestore";
 import Loading from "../Loading/Lodaing";
 import { IMG_URL, VIDEO_URL } from "../Utils/constant";
+import { useSelector, useStore } from "react-redux";
 
 const UploadFeedPopup = ({ isOpen, closePopup }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -14,6 +15,10 @@ const UploadFeedPopup = ({ isOpen, closePopup }) => {
   const [taggedUsers, setTaggedUsers] = useState([]);
   const [loading,setLoading]=useState(false);
 
+  const user=useSelector((store)=>store.user)
+  console.log(user);
+  const currentUserId=user.uid;
+  
   // Handle file selection
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -85,6 +90,8 @@ const UploadFeedPopup = ({ isOpen, closePopup }) => {
         likes: [],
         comments: [],
         totalViews: 0,
+        photoURL:user.photoURL,
+        
         
       });
       const postId=docRef.id;

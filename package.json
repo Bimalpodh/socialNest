@@ -11,6 +11,9 @@
   "dependencies": {
     "@cloudinary/react": "^1.14.1",
     "@cloudinary/url-gen": "^1.21.0",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@reduxjs/toolkit": "^2.6.1",
     "@tailwindcss/vite": "^4.0.6",
     "axios": "^1.8.4",
@@ -22,11 +25,16 @@
     "react-redux": "^9.2.0",
     "react-router": "^7.1.5",
     "react-router-dom": "^7.1.5",
+    "styled-components": "^6.1.17",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.9.3",
     "autoprefixer": "^10.4.20",
     "vite": "^6.0.5"
-  }
+  },
+  "browsersList": [
+    "last 5 chrome version",
+    "last 5 firefox version"
+  ]
 }

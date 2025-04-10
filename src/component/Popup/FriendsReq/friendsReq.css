@@ -1,0 +1,16 @@
+.RequestList {
+  border: 1px solid black;
+  width: fit-content;
+
+  .List {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    color: black;
+    border: 1px solid black;
+    .ll{
+      display: flex;
+    }
+  }
+}

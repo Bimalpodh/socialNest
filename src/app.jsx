@@ -12,13 +12,16 @@ import "./app.css";
 import Profile from "./component/ProfilePage/Profile.jsx";
 import FriendsProfile from "./component/friendsProfile/FriendsProfile.jsx";
 import PostDetail from "./component/PostDetails/Postdetail.jsx";
-
+import Test from "./Test.jsx";
+import SearchPage from "./component/SearchPage/SearchPage.jsx";
 
 // Layout component to wrap routes
 const AppLayout = () => {
   return (
     <div className="app">
-      <Outlet />
+      <><Outlet />
+      </>
+      
     </div>
   );
 };
@@ -58,9 +61,17 @@ const appRouter = createBrowserRouter([
         element: <PostDetail />,
       },
       // {
-      //   path: "/storypopUp",
-      //   element: <StoryPopUp />,
-      // },
+        
+      //     path: "/search",
+      //     element: <SearchPage />,
+        
+      // }
+      ,
+      {
+        path:"/test",
+        element:<Test />
+      }
+      
     ],
   },
 ]);

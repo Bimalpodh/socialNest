@@ -18,8 +18,8 @@ import settingIcon from "../../assets/image/setting1.png";
 import profileIcon from "../../assets/image/user1.png";
 import notificationIcon from "../../assets/image/notification-bell.png";
 import defaultProfilePic from "../../assets/image/user1.png"; // Default profile pic
-
-const Header = ({ popHandling }) => {
+ import SearchIcon from "../../assets/image/search.png"
+const Header = ({ popHandling,openSearchBar}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,7 +52,7 @@ const Header = ({ popHandling }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        console.log("Firebase User:", user);
+       
         dispatch(
           addUser({
             uid: user.uid,
@@ -88,12 +88,13 @@ const Header = ({ popHandling }) => {
         <div>
           <Link to="/profile">
             <img src={profilePhoto} alt="Profile" />
+            <div className="headerProfile">
+          <p className="userName">{user?.displayName}</p>
+        </div>
           </Link>
           <p className="logBtn" onClick={handleSignOut}>Log Out</p>
         </div>
-        <div className="headerProfile">
-          <p className="userName">{user?.displayName}</p>
-        </div>
+        
       </div>
 
       <ul className="header-element">
@@ -119,13 +120,21 @@ const Header = ({ popHandling }) => {
             </Link>
           </div>
         )}
+         <div className="bar">
+            <div className="link" >
+              <img src={SearchIcon} className="nav-icon"  alt="Create" 
+              onClick={openSearchBar}/>
+              <span  onClick={openSearchBar} className="nav-name"  >Search</span>
+            </div>
+          </div>
 
-        <div className="bar">
+
+        {/* <div className="bar">
           <div className="link" onClick={() => dispatch(toggleNotificationBar())}>
             <img src={notificationIcon} className="nav-icon" alt="Notifications" />
             <span className="nav-name">Notifications</span>
           </div>
-        </div>
+        </div> */}
 
         <div className="bar">
           <Link className="link" to="/profile">

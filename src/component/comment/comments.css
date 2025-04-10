@@ -30,16 +30,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    
 
-    .videomedia {
-      width: 90%;
-      max-height: 80vh;
+    .media {
+      width: auto;
+      max-height: 50vh;
       object-fit: cover;
       border-radius: 10px;
     }
     .imgMedia{
       width: 60%;
-      max-height: 80vh;
+      max-height: 50vh;
       object-fit: cover;
       border-radius: 10px;
 

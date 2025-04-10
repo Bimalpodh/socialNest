@@ -2,10 +2,11 @@ import { useEffect, useState } from "preact/hooks";
 import "./ProfileSetting.css";
 import { onAuthStateChanged, updateProfile } from "firebase/auth";
 import { auth, db } from "../Utils/firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, onSnapshot, query, updateDoc, where } from "firebase/firestore";
 import axios from "axios";
 import { IMG_URL } from "../Utils/constant";
 import { FaEdit, FaCamera, FaSave, FaTimes } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const ProfileSetting = () => {
   const [isFormVisible, setFormVisible] = useState(false);
@@ -15,6 +16,9 @@ const ProfileSetting = () => {
   const [newUserName, setNewUserName] = useState(""); // Added userName state
   const [newBio, setNewBio] = useState("");
   const [loading, setLoading] = useState(false);
+  const user = useSelector((store) => store.user);
+  const [accountType,setAccountType]=useState()
+  console.log(user);
 
   // Toggle form visibility
   const toggleFormVisibility = () => {
@@ -23,27 +27,29 @@ const ProfileSetting = () => {
 
   // Fetch user profile data
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        try {
-          const userRef = doc(db, "users", currentUser.uid);
-          const userdata = await getDoc(userRef);
-          if (userdata.exists()) {
-            const userData = userdata.data();
+        const userRef = doc(db, "users", currentUser.uid);
+  
+        // Listen to real-time updates on the user document
+        const unsubscribeUser = onSnapshot(userRef, (docSnap) => {
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
             setProfileData(userData);
             setNewDisplayName(userData.displayName || "");
-            setNewUserName(userData.userName || ""); // Set userName
+            setNewUserName(userData.userName || "");
             setNewBio(userData.bio || "");
           }
-        } catch (error) {
-          console.log("Error fetching user data:", error);
-        }
+        });
+  
+        // Cleanup Firestore listener
+        return () => unsubscribeUser();
       }
     });
-
-    return () => unsubscribe();
+  
+    // Cleanup Auth listener
+    return () => unsubscribeAuth();
   }, []);
-
   // Handle file selection
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -71,6 +77,16 @@ const ProfileSetting = () => {
       await updateProfile(auth.currentUser, { photoURL: imageUrl });
 
       setProfileData((prev) => ({ ...prev, photoURL: imageUrl }));
+
+      if (user?.post?.length) {
+        await Promise.all(
+          user.post.map(async (m) => {
+            const myuser = doc(db, "posts", m);
+            await updateDoc(myuser, { photoURL: imageUrl });
+          })
+        );
+      }
+
       alert("🎉 Profile photo updated successfully!");
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -85,7 +101,11 @@ const ProfileSetting = () => {
     setLoading(true);
     try {
       const userRef = doc(db, "users", auth.currentUser.uid);
-      await updateDoc(userRef, { displayName: newDisplayName, userName: newUserName, bio: newBio });
+      await updateDoc(userRef, {
+        displayName: newDisplayName,
+        userName: newUserName,
+        bio: newBio,
+      });
 
       await updateProfile(auth.currentUser, { displayName: newDisplayName });
 
@@ -103,10 +123,51 @@ const ProfileSetting = () => {
     setLoading(false);
   };
 
+  const checkUsernameExists = async (username) => {
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("userName", "==", username));
+    const querySnapshot = await getDocs(q);
+    return !querySnapshot.empty;
+  };
+  const handleaccountType = async () => {
+    const userRef = doc(db, "users", auth.currentUser.uid);
+    const userSnap = await getDoc(userRef);
+    const userData = userSnap.data();
+  
+    const newAccountType = userData.accountType === "public" ? "private" : "public";
+  
+    try {
+      // Update user profile
+      await updateDoc(userRef, {
+        accountType: newAccountType,
+      });
+  
+      // Fetch user's posts
+      const postsRef = collection(db, "posts");
+      const q = query(postsRef, where("userId", "==", auth.currentUser.uid));
+      const querySnapshot = await getDocs(q);
+  
+      // Update all matching posts
+      const updatePromises = querySnapshot.docs.map((docSnap) =>
+        updateDoc(docSnap.ref, {
+          accountType: newAccountType,
+        })
+      );
+  
+      await Promise.all(updatePromises);
+  
+      
+    } catch (error) {
+      console.error("Error updating account type:", error);
+      
+    }
+  };
+
   return (
     <div className="profileSettingContainer">
       <div className="ProfileHeader">
         <h3>Edit Profile</h3>
+        <button onClick={handleaccountType}>{profileData.accountType ==="public" ? "public":"private"}</button>
         <button onClick={toggleFormVisibility}>
           <FaEdit /> Edit
         </button>
@@ -115,21 +176,35 @@ const ProfileSetting = () => {
       <div className="User-Detail">
         <div className="user-d">
           <div className="profile-img-wrapper">
-            <img src={profileData.photoURL || "/default-avatar.png"} alt="Profile" />
+            <img
+              src={profileData.photoURL || "/default-avatar.png"}
+              alt="Profile"
+            />
             <label htmlFor="fileInput" className="camera-icon">
               <FaCamera />
             </label>
-            <input type="file" id="fileInput" onChange={handleFileChange} hidden />
+            <input
+              type="file"
+              id="fileInput"
+              onChange={handleFileChange}
+              hidden
+            />
           </div>
 
           <div className="userName">
             <div className="display-name">{profileData.displayName}</div>
-            <div className="profile-name">@{profileData.userName || "Username"}</div>
+            <div className="profile-name">
+              @{profileData.userName || "Username"}
+            </div>
             <p className="bio">{profileData.bio || "No bio yet."}</p>
           </div>
         </div>
 
-        <button className="changeProfileImg-btn" onClick={handleUpload} disabled={loading}>
+        <button
+          className="changeProfileImg-btn"
+          onClick={handleUpload}
+          disabled={loading}
+        >
           {loading ? "Uploading..." : "Upload"}
         </button>
       </div>
@@ -169,10 +244,19 @@ const ProfileSetting = () => {
             </div>
 
             <div className="btn-container">
-              <button className="submit" type="button" onClick={handleSave} disabled={loading}>
+              <button
+                className="submit"
+                type="button"
+                onClick={handleSave}
+                disabled={loading}
+              >
                 <FaSave /> Save
               </button>
-              <button className="cancel" type="button" onClick={toggleFormVisibility}>
+              <button
+                className="cancel"
+                type="button"
+                onClick={toggleFormVisibility}
+              >
                 <FaTimes /> Cancel
               </button>
             </div>

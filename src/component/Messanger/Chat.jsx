@@ -23,7 +23,7 @@ const Chat = () => {
         if (!userDocSnap.exists()) return;
 
         const userDoc = userDocSnap.data();
-        const friends = userDoc?.friends || [];
+        const friends = userDoc?.following|| userDoc?.followers ||[];
 
         const friendList = await Promise.all(
           friends.map(async (f) => {
@@ -44,7 +44,7 @@ const Chat = () => {
     setChatUser(
       myFollowFriend.filter(
         (friend) =>
-          friend.displayName.toLowerCase().includes(inputSearch.toLowerCase()) &&
+          friend.displayName.toLowerCase().startsWith(inputSearch.toLowerCase()) &&
           friend.friends?.includes(auth.currentUser.uid) // ✅ Ensure mutual friendship
       )
     );

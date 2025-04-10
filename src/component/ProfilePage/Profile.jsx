@@ -2,48 +2,57 @@ import "../ProfilePage/profile.css";
 import Header from "../HomePage/Header";
 import { Link } from "react-router";
 import { useEffect, useState } from "preact/hooks";
-import {  db } from "../Utils/firebase";
+import { db } from "../Utils/firebase";
 import {
   collection,
   doc,
   getDoc,
   getDocs,
-  setDoc,
-  updateDoc,
   deleteDoc,
   query,
   where,
+  updateDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import Comments from "../comment/Comments";
 import { useSelector } from "react-redux";
+import FriendsReq from "../Popup/FriendsReq/FriendsReq";
+import FollowListModal from "../Popup/FollowAndFollowingList/FollowListModel";
+import { FaEyeDropper } from "react-icons/fa";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState({});
   const [posts, setPosts] = useState([]);
-  const [friendRequests, setFriendRequests] = useState([]);
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [friends, setFriends] = useState([]);
-  const [selectedType, setSelectedType] = useState("All"); 
+  const [selectedType, setSelectedType] = useState("All");
   const [selectedPost, setSelectedPost] = useState(null);
+
+  const [showFollowModal, setShowFollowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalUserIds, setModalUserIds] = useState([]);
+
   const currentUser = useSelector((store) => store.user);
 
   useEffect(() => {
     if (currentUser) {
       fetchProfileData(currentUser.uid);
-      fetchFriendRequests(currentUser.uid);
-      fetchFriends(currentUser.uid);
       fetchUserPosts(currentUser.uid);
     }
   }, [currentUser]);
 
-  // Fetch profile data
+  // Fetch profile data including followers, following, and friends
   const fetchProfileData = async (userId) => {
     try {
-      const userRef = doc(db, "users", userId);      
+      const userRef = doc(db, "users", userId);
       const userSnap = await getDoc(userRef);
       if (userSnap.exists()) {
-        setProfileData(userSnap.data());
-        console.log(userSnap.data());
-        
+        const data = userSnap.data();
+        setProfileData(data);
+        setFollowers(data.followers || []);
+        setFollowing(data.following || []);
+        setFriends(data.friends || []);
       }
     } catch (error) {
       console.error("Error fetching profile data:", error);
@@ -51,112 +60,21 @@ const Profile = () => {
   };
 
   // Fetch user's posts
-  const fetchUserPosts = async (userId) => {
-    try {
-      const postsRef = collection(db, "posts");
-      const q = query(postsRef, where("userId", "==", userId));
-      const querySnapshot = await getDocs(q);
-
+  const fetchUserPosts = (userId) => {
+    const postsRef = collection(db, "posts");
+    const q = query(postsRef, where("userId", "==", userId));
+  
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const userPosts = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
       setPosts(userPosts);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
-  };
-
-  // Fetch friend requests
-  const fetchFriendRequests = async (userId) => {
-    try {
-      const reqRef = collection(db, "friendReq");
-      const reqSnap = await getDocs(reqRef);
-
-      const requests = await Promise.all(
-        reqSnap.docs.map(async (docSnap) => {
-          const reqData = docSnap.data();
-          if (reqData.receiverId !== userId) return null;
-
-          // Fetch sender's profile details
-          const senderRef = doc(db, "users", reqData.senderId);
-          const senderSnap = await getDoc(senderRef);
-          const senderData = senderSnap.exists() ? senderSnap.data() : {};
-
-          return {
-            id: docSnap.id,
-            senderId: reqData.senderId,
-            senderName: senderData.displayName || "Unknown",
-            senderPhoto: senderData.photoURL || "default-profile.png",
-          };
-        })
-      );
-
-      setFriendRequests(requests.filter(Boolean));
-    } catch (error) {
-      console.error("Error fetching friend requests:", error);
-    }
-  };
-
-  // Fetch friends list
-  const fetchFriends = async (userId) => {
-    try {
-      const friendsRef = doc(db, "friends", userId);
-      const friendsDoc = await getDoc(friendsRef);
-
-      if (friendsDoc.exists()) {
-        setFriends(friendsDoc.data().friends || []);
-      }
-    } catch (error) {
-      console.error("Error fetching friends list:", error);
-    }
-  };
-
-  // Accept friend request
-  const acceptFriendRequest = async (request) => {
-    if (!currentUser) return;
-    const senderId = request.senderId;
-    const receiverId = currentUser.uid;
-
-    const senderFriendRef = doc(db, "friends", senderId);
-    const receiverFriendRef = doc(db, "friends", receiverId);
-
-    const senderDoc = await getDoc(senderFriendRef);
-    const receiverDoc = await getDoc(receiverFriendRef);
-
-    const senderFriends = senderDoc.exists()
-      ? senderDoc.data().friends || []
-      : [];
-    const receiverFriends = receiverDoc.exists()
-      ? receiverDoc.data().friends || []
-      : [];
-
-    await setDoc(
-      senderFriendRef,
-      { friends: [...senderFriends, receiverId] },
-      { merge: true }
-    );
-    await setDoc(
-      receiverFriendRef,
-      { friends: [...receiverFriends, senderId] },
-      { merge: true }
-    );
-
-    await deleteDoc(doc(db, "friendReq", request.id));
-
-    setFriendRequests(friendRequests.filter((req) => req.id !== request.id));
-    setFriends([...friends, senderId]);
-  };
-
-  // Unfollow a friend
-  const unfollowFriend = async (friendId) => {
-    if (!currentUser) return;
-
-    const userFriendsRef = doc(db, "friends", currentUser.uid);
-    const updatedFriends = friends.filter((id) => id !== friendId);
-    await updateDoc(userFriendsRef, { friends: updatedFriends });
-    setFriends(updatedFriends);
+    }, (error) => {
+      console.error("Error fetching posts in real-time:", error);
+    });
+  
+    return unsubscribe; // for cleanup
   };
   // Delete user's post
   const deletePost = async (postId) => {
@@ -168,12 +86,33 @@ const Profile = () => {
     }
   };
 
+  const openFollowModal = (title, ids) => {
+    setModalTitle(title);
+    setModalUserIds(ids);
+    setShowFollowModal(true);
+  };
+  const handleVisible=async(pid,v)=>{
+    const userRef=doc(db,"posts",pid);
+    if(v=="visible"){
+      await updateDoc(userRef,{
+        visibility: "Hide"
+      })
+    }
+    else{
+      await updateDoc(userRef,{
+        visibility:"visible"
+      })
+    }
+   
+
+  }
 
   return (
     <div className="profileContainer">
       <div className="header">
         <Header />
       </div>
+
       <div className="myprofileContainer">
         <div className="myprofile">
           <div className="bg-container">
@@ -183,6 +122,7 @@ const Profile = () => {
                 src={profileData.photoURL || "default-profile.png"}
               />
             </div>
+
             <div className="profileDataContainer">
               <div className="profileDataHeader">
                 <label>{profileData.displayName}</label>
@@ -190,64 +130,81 @@ const Profile = () => {
                   <button>Edit Profile</button>
                 </Link>
               </div>
+
               <div className="followContainer">
                 <div className="ff">
                   <label>
-                    <span>{posts.length || 0}</span> : Posts{" "}
+                    <span>{posts.length}</span> : Posts
                   </label>
                 </div>
                 <div className="ff">
-                  <label>
-                    <span>{friends.length || 0}</span> : Friends{" "}
+                  <label
+                    onClick={() => openFollowModal("Followers", followers)}
+                  >
+                    <span>{followers.length}</span> : Followers
+                  </label>
+                  <label
+                    onClick={() => openFollowModal("Following", following)}
+                  >
+                    <span>{following.length}</span> : Following
                   </label>
                 </div>
               </div>
             </div>
+
+            <div className="RequestList">
+            <FriendsReq onFriendAccepted={() => fetchProfileData(currentUser.uid)} />
+
+            </div>
           </div>
         </div>
-
-        {/* Display Friend Requests */}
-        {friendRequests.length > 0 && (
-          <div className="friendRequests">
-            <h3>Friend Requests</h3>
-            {friendRequests.map((req) => (
-              <div key={req.id} className="requestItem">
-                <img
-                  src={req.senderPhoto}
-                  alt="profile"
-                  className="friendReqImg"
-                />
-                <p>{req.senderName} sent you a request</p>
-                <button onClick={() => acceptFriendRequest(req)}>Accept</button>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Post Type Selector */}
         <div className="postTypes">
-          <button className={selectedType === "All" ? "active" : ""} onClick={() => setSelectedType("All")}>All</button>
-          <button className={selectedType === "Post" ? "active" : ""} onClick={() => setSelectedType("Post")}>Post</button>
-          <button className={selectedType === "Video" ? "active" : ""} onClick={() => setSelectedType("Video")}>Video</button>
+          <button
+            className={selectedType === "All" ? "active" : ""}
+            onClick={() => setSelectedType("All")}
+          >
+            All
+          </button>
+          <button
+            className={selectedType === "Post" ? "active" : ""}
+            onClick={() => setSelectedType("Post")}
+          >
+            Image
+          </button>
+          <button
+            className={selectedType === "Video" ? "active" : ""}
+            onClick={() => setSelectedType("Video")}
+          >
+            Video
+          </button>
         </div>
 
-      
-         {/* Display Posts */}
-         <div className="view-post">
+        {/* Display Posts */}
+        <div className="view-post">
           {posts
-            .filter((p) => selectedType === "All" || (selectedType === "Post" && !p.mediaUrl.endsWith("mp4")) || (selectedType === "Video" && p.mediaUrl.endsWith("mp4")))
+            .filter(
+              (p) =>
+                selectedType === "All" ||
+                (selectedType === "Post" && !p.mediaUrl.endsWith("mp4")) ||
+                (selectedType === "Video" && p.mediaUrl.endsWith("mp4"))
+            )
             .map((p) => (
               <div
                 key={p.id}
                 className={p.mediaUrl.endsWith("mp4") ? "vbox" : "imgBox"}
               >
                 {p.mediaUrl.endsWith("mp4") ? (
-                  <video
+                <div>
+                    <video
                     className="myVideo"
                     src={p.mediaUrl}
                     controls
                     onClick={() => setSelectedPost(p.id)}
                   ></video>
+                 
+                </div>
                 ) : (
                   <img
                     className="myImages"
@@ -257,15 +214,33 @@ const Profile = () => {
                   />
                 )}
                 {currentUser?.uid === p.userId && (
-                  <button className="deletePostBtn" onClick={() => deletePost(p.id)}>X</button>
+                  <div>
+                  <button
+                    className="deletePostBtn"
+                    onClick={() => deletePost(p.id)}
+                  >
+                    delete
+                  </button>
+                  <button className="visibility"onClick={()=>{handleVisible(p.id,p.visibility)}}>{p.visibility == "visible" ? "visible" :"Hide"}</button></div>
                 )}
               </div>
             ))}
         </div>
 
-        {selectedPost && <Comments postid={selectedPost} onClose={() => setSelectedPost(null)} />}
-
+        {selectedPost && (
+          <Comments
+            postid={selectedPost}
+            onClose={() => setSelectedPost(null)}
+          />
+        )}
       </div>
+      {showFollowModal && (
+        <FollowListModal
+          title={modalTitle}
+          userIds={modalUserIds}
+          onClose={() => setShowFollowModal(false)}
+        />
+      )}
     </div>
   );
 };

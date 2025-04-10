@@ -4,10 +4,12 @@ import Story from "../Story/Story";
 import Post from "./Post";
 import Suggest from "./Suggest";
 import Header from "./Header";
-import UploadFeedPopup from "../PopPage/UploadFeedPopup"; // ✅ Import correctly
+import UploadFeedPopup from "../PopPage/UploadFeedPopup"; 
 import { auth } from "../Utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router";
+import SearchPage from "../SearchPage/SearchPage";
+
 
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -15,7 +17,8 @@ export default function Home() {
   const navigate = useNavigate();
   const [popupWidth, setPopupWidth] = useState("650px");
   const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
+  const [openSearch,setOpenSeaarch]=useState(false) 
 
   //  Check if user is logged in and persist authentication state
   useEffect(() => {
@@ -36,15 +39,15 @@ export default function Home() {
     }
   }, []);
 
-  if (loading) return null; // ✅ Prevents flashing of Home page before redirect
+  if (loading) return null;
 
-  return currentUser ? ( // ✅ Ensures the page only renders when user is authenticated
-    <div className="firstContainer">
-      <Header popHandling={() => setIsPopupOpen(true)} />
+  return currentUser ? ( 
+    <div className="firstContainer" >
+      <Header popHandling={() => setIsPopupOpen(true) } openSearchBar={()=>setOpenSeaarch(true)} />
 
-      <div className="Containt-box" ref={containerRef}>
+      <div className="Containt-box" ref={containerRef} onClick={()=>{setOpenSeaarch(false)}}>
         <div className="story">
-          <Story />
+          
         </div>
 
         <div className="popHandler">
@@ -52,15 +55,15 @@ export default function Home() {
             <UploadFeedPopup
               isOpen={isPopupOpen}
               closePopup={() => setIsPopupOpen(false)}
-              popupWidth={popupWidth} // ✅ Pass dynamic width
+              popupWidth={popupWidth} 
             />
           )}
         </div>
 
-        
+        <Story />
         <Post />
       </div>
-      <Suggest />
+      {openSearch ? (<SearchPage/>):<Suggest/>}
     </div>
-  ) : null; // ✅ Prevents rendering if user is null
+  ) : null; 
 }

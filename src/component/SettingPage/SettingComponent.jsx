@@ -9,14 +9,14 @@ const SettingContainer=()=>{
         <img src="./src/assets/image/user.png"></img>
         <div> Edit Profile</div>
       </div>
-      <div className="Set-Icon">
+      {/* <div className="Set-Icon">
         <img src="./src/assets/image/bell.png"></img>
         <div> Edit Profile</div>
-      </div>
+      </div> */}
     </div>
 
 
-    <div className="Setting-Category">
+    {/* <div className="Setting-Category">
       <span className="Require"> Who can see your content </span>
       <div className="Set-Icon">
         <img src="./src/assets/image/padlock.png"></img>
@@ -62,7 +62,7 @@ const SettingContainer=()=>{
         <img src="./src/assets/image/privacy.png"></img>
         <div>Privacy</div>
       </div>
-    </div>
+    </div> */}
 
 
   </div>

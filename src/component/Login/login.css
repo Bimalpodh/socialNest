@@ -1,86 +1,117 @@
 .login-Container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #f4f4f4;
-  
+  background: linear-gradient(to right, #f8e1f4, #e0f7fa);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   .login-box {
-    margin-top: 15%;
-    border: 1px solid #f5efef;
-    width: 400px;
-    height: auto; /* Ensure it has a defined height */
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10%;
-    
+    margin-top: 5%;
+    margin-bottom: 2%;
+    background: #ffffff;
+    border-radius: 15px;
+    width: 380px;
+    padding: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
     .header-container {
+      text-align: center;
+      margin-bottom: 2rem;
 
       .logo {
-        margin-left: 10%;
-        position: absolute;
-        height: 75px;
-
+        height: 70px;
+        margin-bottom: 10px;
       }
+
       h3 {
-        display: flex;
-        align-items: center;
-        padding-top: 15%;
-        position: relative;
-        font-size: 26px;
-        margin-left: 25%;
+        font-size: 28px;
+        color: #333;
+        font-weight: bold;
       }
     }
+
     .form-container {
       form {
         display: flex;
         flex-direction: column;
-        display: flex;
-        justify-items: center;
         align-items: center;
-       
+
         input {
-          height: 40px;
-          width: 300px;
-          margin: 10px;
-          border-radius: 3px;
-          border: 1px solid #b1a4a4;
-          padding-left: 20px;
+          height: 45px;
+          width: 100%;
+          max-width: 300px;
+          margin-bottom: 15px;
+          border-radius: 8px;
+          border: 1px solid #ccc;
+          padding: 0 15px;
+          font-size: 16px;
+          transition: border-color 0.2s ease;
 
-        }
-        .errorMsg{
-          padding-left: 40px;
-          color:#d41313;
-          font-weight: bold;
-          font-size: large;
-        }
-        button{
-          margin: 10px;
-          height: 50px;
-          width: 300px;
-          border:none;
-          border-radius: 10px;
-          background: #d858c7;
-          font-size: 22px;
-          color: #f4f4f4;
-          cursor: pointer;
-          
-        }
-
-        p{
-          cursor: pointer;
-
-          span{
-            color:#20b9f5;
-            font-weight: bolder;
-            font-size: 22px;
-            cursor: pointer;
+          &:focus {
+            border-color: #d858c7;
+            outline: none;
           }
         }
 
+        .errorMsg {
+          color: #e63946;
+          font-weight: 600;
+          font-size: 14px;
+          margin-bottom: 10px;
+          text-align: left;
+          width: 100%;
+          max-width: 300px;
+        }
+
+        button {
+          height: 50px;
+          width: 100%;
+          max-width: 300px;
+          border: none;
+          border-radius: 10px;
+          background: #d858c7;
+          font-size: 18px;
+          color: white;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.3s ease;
+
+          &:hover {
+            background: #c144b3;
+          }
+        }
+
+        p {
+          font-size: 14px;
+          margin-top: 1rem;
+
+          span {
+            color: #20b9f5;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
       }
     }
+  }
+
+  .footerCont {
+    margin-top: auto;
+    text-align: center;
+    font-size: 13px;
+    color: #888;
   }
 }

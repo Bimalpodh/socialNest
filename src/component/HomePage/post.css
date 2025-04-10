@@ -80,7 +80,7 @@
           width: 80%;
           align-items: center;
           display: flex;
-          justify-content: ;
+          /* justify-content: ; */
           object-fit: cover;
         }
       }

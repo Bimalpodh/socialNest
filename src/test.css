@@ -1,0 +1,174 @@
+/* ProfilePage.css */
+
+.profile-page {
+  max-width: 900px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+  overflow: hidden; /* Important to contain floated/absolute elements and rounded corners */
+}
+
+/* --- Cover Photo --- */
+.cover-photo-container {
+  width: 100%;
+  height: 250px; /* Adjust height as needed */
+  overflow: hidden; /* Ensure image doesn't overflow */
+}
+
+.cover-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Scales the image while preserving aspect ratio */
+}
+
+/* --- Profile Header --- */
+.profile-header {
+  display: flex;
+  align-items: flex-end; /* Align items to bottom */
+  padding: 0 20px;
+  margin-top: -75px; /* Pulls the header up over the cover photo */
+  position: relative; /* Needed for overlap */
+  z-index: 1; /* Ensure header is above cover */
+}
+
+.profile-picture-container {
+  flex-shrink: 0; /* Prevent shrinking */
+  margin-right: 20px;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #fff; /* White border around profile pic */
+  background-color: #eee; /* Fallback color */
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-info {
+  margin-bottom: 10px; /* Add some space below the info */
+  flex-grow: 1; /* Allow info to take remaining space */
+  color: #333; /* Default text color */
+}
+
+/* Adjust text color if needed over dark cover photos - maybe add a subtle text shadow */
+/* .profile-info { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); } */
+
+
+.full-name {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.username {
+  font-size: 1.1em;
+  color: #555;
+  margin: 0 0 10px 0;
+}
+
+.bio {
+  font-size: 0.95em;
+  color: #444;
+  line-height: 1.4;
+  margin-top: 5px;
+}
+
+/* Optional Edit Button Styling */
+/*
+.edit-profile-btn {
+  align-self: center; // Align button vertically in the flex container
+  margin-left: auto; // Push button to the right
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.edit-profile-btn:hover {
+  background-color: #eee;
+}
+*/
+
+/* --- Profile Stats --- */
+.profile-stats {
+  display: flex;
+  justify-content: space-around; /* Distribute items evenly */
+  padding: 20px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background-color: #f9f9f9;
+  margin-top: 20px; /* Add space above stats */
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item strong {
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+
+.stat-item span {
+  font-size: 0.9em;
+  color: #777;
+}
+
+/* --- Profile Content --- */
+.profile-content {
+  padding: 20px;
+}
+
+.profile-content h3 {
+  font-size: 1.4em;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* --- Responsive Adjustments (Example) --- */
+@media (max-width: 600px) {
+  .profile-header {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items */
+    margin-top: -50px; /* Adjust overlap */
+    text-align: center; /* Center text */
+  }
+
+  .profile-picture-container {
+    margin-right: 0;
+    margin-bottom: 10px; /* Add space below pic */
+  }
+
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+  }
+
+  .full-name {
+    font-size: 1.5em;
+  }
+
+  .username {
+    font-size: 1em;
+  }
+
+  .profile-stats {
+    padding: 15px 10px; /* Reduce padding */
+    font-size: 0.9em; /* Slightly smaller text on mobile */
+  }
+
+  .stat-item strong {
+    font-size: 1.1em;
+  }
+}

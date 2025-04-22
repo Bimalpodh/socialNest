@@ -167,17 +167,17 @@ const Post = () => {
 
                   <img className="save" src="./src/assets/image/bookmark.png" alt="Save" onClick={()=>handleCollection(p.id)} />
                 </div>
-                <div className="shareDIv">
+                {/* <div className="shareDIv">
                   <img className="share" src="./src/assets/image/share2.png" alt="Share" />
-                </div>
+                </div> */}
               </div>
 
               {/* Post Details */}
               <div className="bottom">
                 <p>{p.likes?.length || 0} Likes</p>
                 <div className="userDesc">
-                  <p className="userName">{p.userName}</p>
-                  <p>{p.description}</p>
+                  {/* <p className="userName">{p.userName}</p> */}
+                  <p>{p.caption}</p>
                 </div>
                 <div className="latestComment">
                   <p>{p.latestCommenter}</p>

@@ -89,7 +89,7 @@ const Header = ({ popHandling,openSearchBar}) => {
           <Link to="/profile">
             <img src={profilePhoto} alt="Profile" />
             <div className="headerProfile">
-          <p className="userName">{user?.displayName}</p>
+          <p className="userName">{user.displayName}</p>
         </div>
           </Link>
           <p className="logBtn" onClick={handleSignOut}>Log Out</p>

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./SearchPage.css";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../Utils/firebase";
+import { useNavigate } from "react-router";
 
 export default function SearchPage({openSearchBar}) {
   const [input, setInput] = useState("");
   const [users, setUsers] = useState([]);
+  const navigate=useNavigate();
 
   useEffect(() => {
     if (input.trim()) {
@@ -29,6 +31,9 @@ export default function SearchPage({openSearchBar}) {
       console.error("Error fetching users:", error);
     }
   };
+  const handleNav=(i)=>{
+    navigate("/friendprofile", { state: { friendsId: i} });
+  }
 
   return (
     <div>
@@ -39,9 +44,9 @@ export default function SearchPage({openSearchBar}) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <div className="searchItems">
+        <div className="searchItems" >
           {users.map((user) => (
-            <div className="userData">
+            <div className="userData" onClick={()=>handleNav(user.uid)}>
               <img src={user.photoURL}/>
               <p key={user.id}>{user.displayName}</p>
             </div>

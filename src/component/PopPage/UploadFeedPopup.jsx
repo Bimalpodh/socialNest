@@ -91,6 +91,7 @@ const UploadFeedPopup = ({ isOpen, closePopup }) => {
         comments: [],
         totalViews: 0,
         photoURL:user.photoURL,
+        visibility:"visible"
         
         
       });
